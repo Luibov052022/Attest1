@@ -23,15 +23,15 @@ def choice(number):
     if number == '1':
         f = File.File('notes.json')
     elif number == '2':
-        n1 = Note.Note(input('Введите заголовок: '),
-                       input('Введите текст заметки: '))
         try:
+            n1 = Note.Note(input('Введите заголовок: '),
+                           input('Введите текст заметки: '))
             num = File.File.count_file('notes.json')
+            File.File.append_to_json('notes.json', {num+1: n1.infoNote})
         except FileNotFoundError as e:
             print(
                 f"[FileNotFoundError]: {e.strerror}, filename: {e.filename} . Сначала нужно созать файл {e.filename}")
 
-        File.File.append_to_json('notes.json', {num+1: n1.infoNote})
     elif number == '4':
         try:
             File.File.print_notes()
@@ -58,7 +58,8 @@ def choice(number):
                 f"[FileNotFoundError]: {e.strerror}, filename: {e.filename} . Сначала нужно созать файл {e.filename}")
     elif number == '6':
         try:
-            File.File.print_notes_date(input('Введите дату в формате ДД-ММ-ГГ: '))
+            File.File.print_notes_date(
+                input('Введите дату в формате ДД-ММ-ГГ: '))
         except FileNotFoundError as e:
             print(
                 f"[FileNotFoundError]: {e.strerror}, filename: {e.filename} . Сначала нужно созать файл {e.filename}")
